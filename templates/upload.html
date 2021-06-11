@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Face Recognition for Static Image</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css')}}">
+
+</head>
+
+<body>
+
+  <h1 class="upload">FACE RECOGNITION FOR STATIC IMAGE</h1>
+
+  <p class="msg">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+  </p>
+
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+
+    <label>Upload image : </label>
+
+    <input type="file" name="file" autocomplete="off" required>
+
+    <br /><br />
+
+    <center>
+
+      <input type ="submit" value = "UPLOAD & RECOGNIZE " class="btn">
+
+    </center>
+
+  </form>
+
+  <center>
+
+    <a href=live><button class="webbtn">REAL TIME FACE RECOGNITION</button></a>&emsp;&emsp;&emsp;&emsp;
+    <a href=register><button class="webbtn">REGISTER USER FACE</button></a>
+
+  </center>
+
+  {% if filename %}
+
+  <div>
+
+    <table>
+
+      <tr>
+
+        <th>
+          <p class="leftimg">UPLOADED  IMAGE :</p>
+        </th>
+
+        <th>
+          <p class="rightimg">RECOGNIZED IMAGE :</p>
+        </th>
+
+      </tr>
+
+      <br /><br />
+
+      <tr>
+
+        <td>
+          <img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" class="recimglf">
+        </td>
+
+        <td>
+          <img src="{{ url_for('recognized_image_display', filename=filename) }}" alt="Recognized Image" class="recimgrh">
+        </td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+  {% endif %}
+
+</body>
+
+</html>

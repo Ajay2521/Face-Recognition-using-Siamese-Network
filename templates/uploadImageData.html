@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Image Data</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css')}}">
+
+</head>
+
+<body>
+
+  <h1 class="upload">UPLOAD USER IMAGE FOR FACE DETECTION</h1>
+
+  <p class="msg">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+  </p>
+
+  <form method="POST" action="/uploadImageData" enctype="multipart/form-data">
+
+    <label>User Name : </label>
+
+    <input type="text" name="userName" placeholder="Enter User Name" autocomplete="off" required>
+
+    <br /><br />
+
+    <label>Upload image : </label>
+
+    <input type="file" name="file" autocomplete="off" required>
+
+    <br /><br />
+
+    <center>
+
+      <input type ="submit" value = " UPLOAD & DISPLAY " class="btn">
+
+    </center>
+
+  </form>
+
+  <center>
+
+    <a href=webcamVideoData><button class="webbtn">REAL TIME USER FACE DETECTION</button></a>&emsp;&emsp;&emsp;&emsp;
+
+    <a href=recognition><button class="webbtn">RECOGNIZE USER FACE</button></a>
+
+  </center>
+
+  {% if filename %}
+
+  <div>
+
+    <table>
+
+      <tr>
+
+        <th>
+          <p>UPLOADED  IMAGE :</p>
+        </th>
+
+        <th>
+          <p class="rigthimg">DATABASE IMAGE :</p>
+        </th>
+
+      </tr>
+
+      <br /><br /><br /><br />
+
+      <tr>
+
+        <td>
+          <img src="{{ url_for('display_uploaded_image', filename=filename) }}" alt="Uploaded Image" class="imglf">
+        </td>
+
+        <td>
+          <img src="{{ url_for('display_database_image', filename=filename, username=username) }}" alt="Database Image" class="imgrh">
+        </td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+  {% endif %}
+
+</body>
+
+</html>

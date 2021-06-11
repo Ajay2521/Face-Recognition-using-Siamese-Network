@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-Time User Face Detection</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css')}}">
+
+</head>
+
+<body>
+
+  <h1 class="webcam">REAL - TIME USER FACE DETECTION FOR UPLOADING USER DATA</h1>
+
+  <form method="POST" action="/webcamVideoData" enctype="multipart/form-data">
+
+    <label>User Name : </label>
+
+    <input type="text" name="userName" autocomplete="off" placeholder="Enter User Name" required>
+
+    <br /><br />
+
+    <center>
+      <input type ="submit" value = " START DETECTION " class="btn">
+    </center>
+
+  </form>
+
+  {% if username %}
+
+  <div>
+
+    <img src="{{ url_for('webcam_face_detect', username=username) }}", alt="LIVE WEBCAM" class="webcamimg">
+
+  </div>
+
+  {% endif %}
+
+  <center>
+
+    <a href=uploadImageData><button class="webbtn">UPLOAD IMAGE FOR FACE DETECTION</button></a>&emsp;&emsp;&emsp;&emsp;
+
+    <a href=recognition><button class="webbtn">RECOGNIZE USER FACE</button></a>
+
+  </center>
+
+</body>
+
+</html>
